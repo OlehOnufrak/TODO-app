@@ -2,6 +2,7 @@
 %p
   %strong Title:
   = @todo_list.title
+  = @todo_list.created_at.strftime("Created %d.%m.%Y at %H:%M")
 #todo_items_wrapper
   = render @todo_list.todo_items
   #form

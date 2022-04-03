@@ -1,8 +1,15 @@
 class TodoListsController < ApplicationController
+  require 'will_paginate/array'
   before_action :set_todo_list, only: %i[ show edit update destroy ]
 
   def index
-    @todo_lists = TodoList.all
+    @todo_lists = TodoList.paginate(page: params[:page], per_page: 5).order(created_at: :desc)
+    case
+    when params[:sort] == 'time'
+      @todo_lists
+    when params[:sort] == 'percentage'
+      @todo_lists = TodoList.all.sort_by{ |todo_list| todo_list.percent_done }.reverse.paginate(page: params[:page], per_page: 5)
+    end
   end
 
   def show

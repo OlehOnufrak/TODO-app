@@ -9,4 +9,12 @@
 #
 class TodoList < ApplicationRecord
   has_many :todo_items
+
+  def percent_done
+    done_todo_items = todo_items.pluck(:done_at).compact.size
+    total_todo_items = todo_items.size
+    return 0 if total_todo_items == 0
+
+    (100 * done_todo_items.to_f / total_todo_items).round(1)
+  end
 end
