@@ -6,9 +6,11 @@
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer          not null
 #
 class TodoList < ApplicationRecord
-  has_many :todo_items
+  has_many :todo_items, dependent: :destroy
+  belongs_to :user
 
   def percent_done
     done_todo_items = todo_items.pluck(:done_at).compact.size

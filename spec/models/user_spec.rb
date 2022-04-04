@@ -16,12 +16,12 @@
 #  current_sign_in_ip     :string
 #  last_sign_in_ip        :string
 #
-class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :trackable
+require 'rails_helper'
 
-  has_many :todo_lists, dependent: :destroy
-  has_many :memberships, dependent: :destroy
-  has_many :my_audiences, through: :memberships, dependent: :destroy
+RSpec.describe TodoList, type: :model do
+  let!(:user) { create(:user) }
+
+  it 'have valid factory' do
+    expect(user).to be_valid
+  end
 end

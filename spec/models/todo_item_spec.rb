@@ -9,10 +9,13 @@
 #  updated_at   :datetime         not null
 #  done_at      :datetime
 #
-class TodoItem < ApplicationRecord
-  belongs_to :todo_list
+require 'rails_helper'
 
-  def done?
-    done_at.present?
+RSpec.describe TodoItem, type: :model do
+  let!(:todo_list) { create(:todo_list) }
+  let!(:todo_item) { create(:todo_item) }
+
+  it 'have valid factory' do
+    expect(todo_item).to be_valid
   end
 end

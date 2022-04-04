@@ -19,6 +19,11 @@ group :development, :test do
   gem 'pry'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'annotate'
+  gem 'rspec-rails'
+  gem 'faker'
+  gem 'factory_bot_rails'
+  gem 'simplecov', require: false
+  gem 'database_cleaner'
 end
 
 group :development do
