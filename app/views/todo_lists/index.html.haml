@@ -1,0 +1,20 @@
+%h1 Todo list
+%table
+  %thead
+    %tr
+      %th Title
+      %th= link_to "Sorted by created time", sort: "time"
+      %th= link_to "Sorted as a percentage", sort: "percentage"
+  %tbody
+    - @todo_lists.each do |todo_list|
+      %tr
+        %td= todo_list.title 
+        %td= todo_list.created_at.strftime("Created %d.%m.%Y at %H:%M")
+        %td= todo_list.todo_items.size
+        %td= "#{todo_list.percent_done}%"
+        %td= link_to 'Show', todo_list
+        %td= link_to 'Edit', edit_todo_list_path(todo_list)
+        %td= link_to 'Delete', todo_list, method: :delete, data: { confirm: 'Are you sure?' }
+%br
+= link_to 'New Todo list', new_todo_list_path
+= will_paginate @todo_lists
